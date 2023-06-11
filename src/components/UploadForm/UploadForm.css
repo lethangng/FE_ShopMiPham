@@ -1,0 +1,65 @@
+.image-preview {
+  position: relative;
+}
+
+.image-preview img {
+  width: 100%;
+  /* width: 200px; */
+  height: 200px;
+  margin-bottom: 10px;
+}
+
+.image-preview .close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 5px;
+  border: none;
+  font-size: 16px;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 5px;
+  background: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.custom-file-icon {
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.custom-file-text {
+  font-size: 14px;
+}
+
+.custom-file-upload:hover {
+  background: #e0e0e0;
+}
+/* .form-control-file {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+} */
+
+/* .form-control-file + label {
+  font-size: 1.25em;
+  font-weight: 700;
+  color: white;
+  background-color: black;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.form-control-file:focus + label,
+.form-control-file + label:hover {
+  background-color: red;
+} */
