@@ -20,8 +20,11 @@ import EditProduct from "pages/Admin/Product/EditProduct";
 // import UploadForm from "./UploadForm/UploadForm";
 import DetailProduct from "pages/Admin/Product/DetailProduct";
 import Regiter from "pages/Account/Regiter";
+import Chart from "pages/Admin/Chart/Chart";
+import Bill from "pages/Admin/Bill/Bill";
+import DetailBill from "pages/Admin/Bill/DetailBill";
 
-const AccountRoute = ({ path, ...rest }: RouteProps) => {
+function AccountRoute({ path, ...rest }: RouteProps) {
   const account: AccountState = useSelector((state: AppState) => {
     return state.account;
   });
@@ -70,11 +73,17 @@ const AccountRoute = ({ path, ...rest }: RouteProps) => {
           path={`${UrlConstants.PRODUCT_DETAIL}/:id`}
           element={<DetailProduct />}
         />
+        <Route path={UrlConstants.CHART} element={<Chart />} />
+        <Route path={UrlConstants.BILL_LIST} element={<Bill />} />
+        <Route
+          path={`${UrlConstants.BILL_DETAIL}/:id/:page`}
+          element={<DetailBill />}
+        />
       </Route>
-      <Route path="/regiter" element={<Regiter />} />
+      <Route path={UrlConstants.REGITER} element={<Regiter />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
-};
+}
 
 export default AccountRoute;

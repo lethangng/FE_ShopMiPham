@@ -109,7 +109,7 @@ const ProductType = () => {
               value={searchKeyword}
               onChange={handleKeywordPress}
               className="form-control col mr-3"
-              placeholder="Từ khóa"
+              placeholder="Tên loại sản phẩm"
             />
             <Link
               to={UrlConstants.PRODUCT_TYPE_ADD}

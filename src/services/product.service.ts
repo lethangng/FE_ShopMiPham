@@ -6,7 +6,10 @@ import {
 } from "store/products/types";
 import JSZip from "jszip";
 
-const getProductsPaging = async (keyword: string, currentPage: number) => {
+const getProductsPaging = async (
+  keyword: string,
+  currentPage: number | null
+) => {
   try {
     const res = await api.get(`v1/products/${currentPage}?keyword=${keyword}`);
     if (res && res.data && res.data && res.data.errCode === 0) {

@@ -36,6 +36,9 @@ const HeThong = () => {
             <Link className="collapse-item" to={UrlConstants.PRODUCT_LIST}>
               Sản phẩm
             </Link>
+            <Link className="collapse-item" to={UrlConstants.BILL_LIST}>
+              Hóa đơn
+            </Link>
           </div>
         </div>
       </li>

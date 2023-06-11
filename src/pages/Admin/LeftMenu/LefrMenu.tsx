@@ -51,10 +51,10 @@ const LefrMenu = () => {
 
         {/* Nav Item - Charts */}
         <li className="nav-item">
-          <a className="nav-link" href="#">
+          <Link className="nav-link" to={UrlConstants.CHART}>
             <i className="fas fa-fw fa-chart-area" />
-            <span>Thống kê</span>
-          </a>
+            <span>Thống kê hóa đơn</span>
+          </Link>
         </li>
         {/* Divider */}
         <hr className="sidebar-divider d-none d-md-block" />

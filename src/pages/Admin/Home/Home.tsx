@@ -86,9 +86,12 @@ const Home = () => {
             <div className="card-body">
               <div className="row no-gutters align-items-center">
                 <div className="col mr-2">
-                  <div className="text-200 font-weight-bold text-warning text-uppercase mb-1">
-                    Thống kê
-                  </div>
+                  <Link
+                    className="text-200 font-weight-bold text-warning text-uppercase mb-1"
+                    to={UrlConstants.BILL_LIST}
+                  >
+                    Quản lý hóa đơn
+                  </Link>
                 </div>
                 <div className="col-auto">
                   <i className="fas fa-comments fa-2x text-gray-300" />

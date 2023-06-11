@@ -27,7 +27,7 @@ const regiter = async (user: RegiterUser) => {
   }
 };
 
-const getUsersPaging = async (keyword: string, currentPage: number) => {
+const getUsersPaging = async (keyword: string, currentPage: number | null) => {
   try {
     const res = await api.get(`v1/users/${currentPage}?keyword=${keyword}`);
     if (res && res.data && res.data && res.data.errCode === 0) {

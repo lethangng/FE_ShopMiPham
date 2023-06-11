@@ -293,8 +293,8 @@ const DetailProduct = () => {
             </div>
 
             <div className="form-group d-flex justify-content-end">
-              <Link className="btn btn-danger" to={UrlConstants.PRODUCT_LIST}>
-                Quay lại
+              <Link className="btn btn-primary" to={UrlConstants.PRODUCT_LIST}>
+                <i className="fas fa-undo-alt"></i> Quay lại
               </Link>
             </div>
           </form>

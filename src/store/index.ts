@@ -7,6 +7,7 @@ import persistStore from "redux-persist/es/persistStore";
 import { usersReducer } from "./users/reducers";
 import { productTypesReducer } from "./productTypes/reducers";
 import { productsReducer } from "./products/reducers";
+import { billsReducer } from "./bills/reducers";
 
 const persistConfig = {
   key: "root",
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   users: usersReducer,
   productTypes: productTypesReducer,
   products: productsReducer,
+  bills: billsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

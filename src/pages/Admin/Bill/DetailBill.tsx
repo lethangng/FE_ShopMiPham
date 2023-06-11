@@ -3,16 +3,20 @@ import { UrlConstants } from "../../../constants";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { AppState } from "store";
-import { deleteUsers, loadUserPaging } from "store/users/action";
-import { ItemUser } from "store/users/types";
+import { deleteProductBills, getBillDetail } from "store/bills/actions";
+import { ItemBillDetail } from "store/bills/types";
 import { toast } from "react-toastify";
+import { loadProductPaging } from "store/products/action";
 
-const Users = () => {
-  const users: ItemUser[] = useSelector((state: AppState) => state.users.items);
-  const totalItem = useSelector((state: AppState) => state.users.total);
-  const pageSize = useSelector((state: AppState) => state.users.pageSize);
+const DetailBill = () => {
+  let id = useParams().id as string;
+  const billDetailDetails: ItemBillDetail[] = useSelector(
+    (state: AppState) => state.bills.billDetail
+  );
+  const totalItem = useSelector((state: AppState) => state.bills.total);
+  const pageSize = useSelector((state: AppState) => state.bills.pageSize);
   const [selectedItem, setSelectedItem] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -23,8 +27,14 @@ const Users = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadUserPaging(searchKeyword, currentPage) as any);
-  }, [dispatch, currentPage, searchKeyword]);
+    dispatch(getBillDetail(id, searchKeyword, currentPage) as any);
+  }, [dispatch, id, currentPage, searchKeyword]);
+
+  const products = useSelector((state: AppState) => state.products.items);
+
+  useEffect(() => {
+    dispatch(loadProductPaging("", null) as any);
+  }, [dispatch]);
 
   const handleSelectRow = (id: string) => {
     let newSelectedItems = [...selectedItem];
@@ -37,52 +47,49 @@ const Users = () => {
 
   const handleDelete = () => {
     if (selectedItem) {
-      dispatch(deleteUsers(selectedItem) as any);
+      dispatch(deleteProductBills(selectedItem) as any);
       setSelectedItem([]);
       handleClose();
-      toast.success("Xóa người dùng thành công!");
+      toast.success("Xóa chi tiết hóa đơn thành công!");
     }
   };
 
-  const userElements = users.map((user, index) => {
+  const handleShowNameProduct = (productId: number | string) => {
+    const product = products.find((product) => product.id === productId);
+    return product ? product.name : "Không tìm thấy sản phẩm";
+  };
+
+  const billDetailElements = billDetailDetails.map((billDetail, index) => {
     return (
       <tr
-        key={`user_${user.id}`}
+        key={`billDetail_${billDetail.id}`}
         className={
           "table-row" +
-          (selectedItem.indexOf(user.id) !== -1 ? " selected" : "")
+          (selectedItem.indexOf(billDetail.id) !== -1 ? " selected" : "")
         }
-        onClick={() => handleSelectRow(user.id)}
+        onClick={() => handleSelectRow(billDetail.id)}
       >
         <td className="text-center">
           <input
             type="checkbox"
-            value={`${user.id}`}
-            onChange={() => handleSelectRow(user.id)}
-            checked={selectedItem.indexOf(user.id) !== -1}
+            value={`${billDetail.id}`}
+            onChange={() => handleSelectRow(billDetail.id)}
+            checked={selectedItem.indexOf(billDetail.id) !== -1}
           ></input>
         </td>
         <td>{index + 1}</td>
-        <td>{user.name}</td>
-        <td>{user.email}</td>
-        <td>{user.address}</td>
-        <td>{user.phone}</td>
-        <td>{user.roleId === 1 ? "Admin" : "User"}</td>
-        <td className="text-center">
-          <Link
-            to={UrlConstants.USER_EDIT + "/" + user.id}
-            className="btn btn-outline-warning btn-sm col-auto align-items-center"
-          >
-            <span className="fa fa-pen"></span> Sửa
-          </Link>
-        </td>
+        {/* <td>{billDetail.id}</td> */}
+        <td>{billDetail.billId}</td>
+        <td>{billDetail.productId}</td>
+        <td>{handleShowNameProduct(billDetail.productId)}</td>
+        <td>{billDetail.quantity}</td>
       </tr>
     );
   });
 
   const onPageChanged = (pageNumber: number) => {
     setCurrentPage(pageNumber);
-    dispatch(loadUserPaging(searchKeyword, pageNumber) as any);
+    dispatch(getBillDetail(id, searchKeyword, pageNumber) as any);
   };
 
   const handleKeywordPress = (e: ChangeEvent<HTMLInputElement>) => {
@@ -91,12 +98,12 @@ const Users = () => {
   return (
     <>
       <div>
-        <h1 className="h3 mb-2 text-gray-800">Danh sách người dùng</h1>
+        <h1 className="h3 mb-2 text-gray-800">Danh sách chi tiết hóa đơn</h1>
         {/* DataTales Example */}
         <div className="card shadow mb-4">
           <div className="card-header py-3">
             <h6 className="m-0 font-weight-bold text-primary">
-              Danh sách người dùng
+              Danh sách chi tiết hóa đơn
             </h6>
           </div>
           <div className="header-buttons row">
@@ -105,14 +112,8 @@ const Users = () => {
               value={searchKeyword}
               onChange={handleKeywordPress}
               className="form-control col mr-3"
-              placeholder="Email"
+              placeholder="Mã sản phẩm"
             />
-            <Link
-              to={UrlConstants.USER_ADD}
-              className="btn btn-outline-success btn-sm col-auto mr-3 align-items-center d-flex"
-            >
-              <span className="fa fa-plus"></span> Thêm mới
-            </Link>
 
             {selectedItem.length > 0 && (
               <>
@@ -143,25 +144,32 @@ const Users = () => {
                   <tr>
                     <th></th>
                     <th>STT</th>
-                    <th>Tên</th>
-                    <th>Email</th>
-                    <th>Địa chỉ</th>
-                    <th>SĐT</th>
-                    <th>Chức vụ</th>
-                    <th></th>
+                    {/* <th>Mã chi tiết</th> */}
+                    <th>Mã hóa đơn</th>
+                    <th>Mã sản phẩm</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Số lượng</th>
                   </tr>
                 </thead>
-                <tbody>{userElements}</tbody>
+                <tbody>{billDetailElements}</tbody>
               </table>
             </div>
           </div>
-          <div className="card-footer">
-            <Pagination
-              totalRecords={totalItem}
-              pageLimit={5}
-              pageSize={pageSize}
-              onPageChanged={onPageChanged}
-            ></Pagination>
+          <div className="card-footer ">
+            <div className="row justify-content-between">
+              <Pagination
+                totalRecords={totalItem}
+                pageLimit={5}
+                pageSize={pageSize}
+                onPageChanged={onPageChanged}
+              ></Pagination>
+              <Link
+                className="col-auto btn btn-primary align-self-start mr-3"
+                to={UrlConstants.BILL_LIST}
+              >
+                <i className="fas fa-undo-alt"></i> Quay lại
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -177,7 +185,7 @@ const Users = () => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLongTitle">
-                Xóa người dùng
+                Xóa chi tiết hóa đơn
               </h5>
               <button
                 type="button"
@@ -198,7 +206,7 @@ const Users = () => {
                 className="btn btn-danger"
                 onClick={() => handleDelete()}
               >
-                Xóa
+                OK
               </button>
               <button
                 type="button"
@@ -206,7 +214,7 @@ const Users = () => {
                 data-dismiss="modal"
                 onClick={handleClose}
               >
-                Đóng
+                Hủy
               </button>
             </div>
           </div>
@@ -216,4 +224,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default DetailBill;

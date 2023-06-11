@@ -22,7 +22,10 @@ import {
 import { productService } from "services/product.service";
 import { ThunkDispatch } from "redux-thunk";
 
-export const loadProductPaging = (keyword: string, currentPage: number) => {
+export const loadProductPaging = (
+  keyword: string,
+  currentPage: number | null
+) => {
   return async (dispatch: Dispatch<ProductsActionTypes>) => {
     try {
       dispatch({

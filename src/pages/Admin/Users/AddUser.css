@@ -1,0 +1,20 @@
+.form-group {
+  position: relative;
+}
+.form-group .password-input {
+  position: relative;
+}
+.form-group .password-input input[type=password] {
+  padding-right: 40px;
+}
+.form-group .password-input .toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+.form-group .password-input .is-invalid + .toggle-password {
+  top: calc(50% - 10px);
+  right: 35px;
+}/*# sourceMappingURL=AddUser.css.map */

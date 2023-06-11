@@ -12,4 +12,7 @@ export const UrlConstants = {
   PRODUCT_ADD: "/admin/product-add",
   PRODUCT_EDIT: "/admin/product-edit",
   PRODUCT_DETAIL: "/admin/product-detail",
+  BILL_LIST: "/admin/bills",
+  BILL_DETAIL: "/admin/bill/detail",
+  CHART: "/admin/chart",
 };

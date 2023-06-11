@@ -22,7 +22,7 @@ import {
 import { userService } from "services/user.service";
 import { ThunkDispatch } from "redux-thunk";
 
-export const loadUserPaging = (keyword: string, currentPage: number) => {
+export const loadUserPaging = (keyword: string, currentPage: number | null) => {
   return async (dispatch: Dispatch<UsersActionTypes>) => {
     try {
       dispatch({
