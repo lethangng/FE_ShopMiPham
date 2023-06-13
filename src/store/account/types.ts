@@ -15,6 +15,8 @@ export interface AuthenticatedUser {
   name: string;
   email: string;
   avatar: string;
+  address: string;
+  phone: string;
 }
 
 export interface RegiterUser {

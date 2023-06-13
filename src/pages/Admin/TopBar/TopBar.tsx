@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import { UrlConstants } from "../../../constants";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { userService } from "services/user.service";
 import { AppState } from "store";
 import { logout } from "store/account/actions";
 import { AuthenticatedUser } from "store/account/types";
@@ -11,6 +14,18 @@ const TopBar = () => {
   const user = useSelector<AppState>(
     (state) => state.account.user
   ) as AuthenticatedUser;
+
+  const [avatar, setAvatar] = useState<File | null>(null);
+
+  useEffect(() => {
+    const getAvatar = async (email: string) => {
+      if (user) {
+        const res = await userService.getAvatarUser(email);
+        setAvatar(res);
+      }
+    };
+    getAvatar(user.email);
+  }, [user]);
 
   return (
     <>
@@ -72,7 +87,11 @@ const TopBar = () => {
               <span className="mr-2 d-none d-lg-inline text-gray-600 small">
                 {user.name}
               </span>
-              <img className="img-profile rounded-circle" src={user.avatar} />
+              <img
+                className="img-profile rounded-circle"
+                src={avatar ? URL.createObjectURL(avatar) : ""}
+                alt="avatar"
+              />
             </a>
             {/* Dropdown - User Information */}
             <div
@@ -82,10 +101,14 @@ const TopBar = () => {
               }
               aria-labelledby="userDropdown"
             >
-              <a className="dropdown-item" href="#">
+              <Link
+                className="dropdown-item"
+                to={UrlConstants.INFO}
+                onClick={() => setIsShowDropDown(!isShowDropDown)}
+              >
                 <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400" />
                 Profile
-              </a>
+              </Link>
               <div className="dropdown-divider" />
               <a
                 className="dropdown-item"

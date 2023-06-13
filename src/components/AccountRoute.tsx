@@ -23,6 +23,7 @@ import Regiter from "pages/Account/Regiter";
 import Chart from "pages/Admin/Chart/Chart";
 import Bill from "pages/Admin/Bill/Bill";
 import DetailBill from "pages/Admin/Bill/DetailBill";
+import Info from "pages/Admin/Info/Info";
 
 function AccountRoute({ path, ...rest }: RouteProps) {
   const account: AccountState = useSelector((state: AppState) => {
@@ -79,6 +80,7 @@ function AccountRoute({ path, ...rest }: RouteProps) {
           path={`${UrlConstants.BILL_DETAIL}/:id/:page`}
           element={<DetailBill />}
         />
+        <Route path={`${UrlConstants.INFO}`} element={<Info />} />
       </Route>
       <Route path={UrlConstants.REGITER} element={<Regiter />} />
       <Route path="*" element={<NotFound />} />

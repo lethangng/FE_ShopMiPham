@@ -88,6 +88,24 @@ const deleteUsers = async (ids: string[]) => {
   }
 };
 
+const getAvatarUser = async (email: string) => {
+  // console.log(email);
+  try {
+    const body = {
+      email,
+    };
+    const res = await api.post("/v1/user/info", body, { responseType: "blob" });
+    if (res) {
+      // console.log(res);
+      // console.log(new File([res.data], res.data.file));
+      return new File([res.data], "avatar.jpg");
+    }
+    throw new Error("Get avatar user fail!");
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
 export const userService = {
   login,
   getUsersPaging,
@@ -96,4 +114,5 @@ export const userService = {
   getUserById,
   deleteUsers,
   regiter,
+  getAvatarUser,
 };
