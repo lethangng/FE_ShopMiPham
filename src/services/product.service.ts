@@ -122,6 +122,23 @@ const getListImgProducts = async (id: string | number) => {
   }
 };
 
+const getTop10Product = async (
+  month: string | number,
+  year: string | number
+) => {
+  try {
+    const res = await api.get(`/v1/bill/${month}/${year}`);
+    // console.log(res.data);
+
+    if (res && res.data && res.data.errCode === 0) {
+      return res.data.data;
+    }
+    throw new Error("Get bill by year fail!");
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
 export const productService = {
   getProductsPaging,
   addProduct,
@@ -129,4 +146,5 @@ export const productService = {
   getProductById,
   deleteProducts,
   getListImgProducts,
+  getTop10Product,
 };

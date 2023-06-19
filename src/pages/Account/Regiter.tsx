@@ -19,6 +19,8 @@ interface FormValues {
   address: string;
 }
 
+const phoneRegExp = /^[0-9]{10}$/;
+
 const Regiter = () => {
   const initialValues: FormValues = {
     email: "",
@@ -61,7 +63,9 @@ const Regiter = () => {
       .required("Vui lòng nhập tên")
       .max(35, "Vui lòng nhập tên dưới 35 ký tự"),
     address: Yup.string().required("Vui lòng nhập địa chỉ."),
-    phone: Yup.string().required("Vui lòng nhập SĐT"),
+    phone: Yup.string()
+      .required("Vui lòng nhập SĐT")
+      .matches(phoneRegExp, "Số điện thoại không hợp lệ"),
   });
 
   const loading = useSelector<AppState>((state) => {

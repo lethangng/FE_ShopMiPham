@@ -68,7 +68,7 @@ const AddUser = () => {
 
   const onSubmit = async (values: FormValues) => {
     const { email, password, confirmPassword, name, roleId } = values;
-    console.log(">>> check", roleId);
+    // console.log(">>> check", roleId);
     if (email && password && confirmPassword && name && roleId) {
       const user: IAddUserRequest = {
         email,

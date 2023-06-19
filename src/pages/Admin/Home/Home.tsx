@@ -94,7 +94,7 @@ const Home = () => {
                   </Link>
                 </div>
                 <div className="col-auto">
-                  <i className="fas fa-comments fa-2x text-gray-300" />
+                  <i className="fa fa-dollar-sign fa-2x text-gray-300" />
                 </div>
               </div>
             </div>

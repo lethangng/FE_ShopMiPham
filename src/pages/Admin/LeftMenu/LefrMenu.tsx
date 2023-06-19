@@ -47,13 +47,25 @@ const LefrMenu = () => {
         {/* Divider */}
         <hr className="sidebar-divider" />
         {/* Heading */}
-        <div className="sidebar-heading">Hỗ trợ</div>
+        <div className="sidebar-heading">Thống kê</div>
 
         {/* Nav Item - Charts */}
         <li className="nav-item">
-          <Link className="nav-link" to={UrlConstants.CHART}>
+          <Link className="nav-link" to={UrlConstants.CHART_BILL}>
             <i className="fas fa-fw fa-chart-area" />
             <span>Thống kê hóa đơn</span>
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to={UrlConstants.CHART_TOP_10_PRODUCT}>
+            <i className="fas fa-fw fa-chart-area" />
+            <span>Thống kê top sản phẩm</span>
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to={UrlConstants.CHART_REVENUE}>
+            <i className="fas fa-fw fa-chart-area" />
+            <span>Thống kê doanh thu</span>
           </Link>
         </li>
         {/* Divider */}

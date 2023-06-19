@@ -14,6 +14,8 @@ export const UrlConstants = {
   PRODUCT_DETAIL: "/admin/product-detail",
   BILL_LIST: "/admin/bills",
   BILL_DETAIL: "/admin/bill/detail",
-  CHART: "/admin/chart",
+  CHART_BILL: "/admin/chart-bill",
+  CHART_TOP_10_PRODUCT: "/admin/chart-top-10-product",
+  CHART_REVENUE: "/admin/chart-revenue",
   INFO: "/admin/info",
 };

@@ -20,10 +20,12 @@ import EditProduct from "pages/Admin/Product/EditProduct";
 // import UploadForm from "./UploadForm/UploadForm";
 import DetailProduct from "pages/Admin/Product/DetailProduct";
 import Regiter from "pages/Account/Regiter";
-import Chart from "pages/Admin/Chart/Chart";
+import ChartBill from "pages/Admin/Chart/ChartBill";
 import Bill from "pages/Admin/Bill/Bill";
 import DetailBill from "pages/Admin/Bill/DetailBill";
 import Info from "pages/Admin/Info/Info";
+import ChartTop10Product from "pages/Admin/Chart/ChartTop10Product";
+import ChartRevenue from "pages/Admin/Chart/ChartRevenue";
 
 function AccountRoute({ path, ...rest }: RouteProps) {
   const account: AccountState = useSelector((state: AppState) => {
@@ -74,7 +76,12 @@ function AccountRoute({ path, ...rest }: RouteProps) {
           path={`${UrlConstants.PRODUCT_DETAIL}/:id`}
           element={<DetailProduct />}
         />
-        <Route path={UrlConstants.CHART} element={<Chart />} />
+        <Route path={UrlConstants.CHART_BILL} element={<ChartBill />} />
+        <Route
+          path={UrlConstants.CHART_TOP_10_PRODUCT}
+          element={<ChartTop10Product />}
+        />
+        <Route path={UrlConstants.CHART_REVENUE} element={<ChartRevenue />} />
         <Route path={UrlConstants.BILL_LIST} element={<Bill />} />
         <Route
           path={`${UrlConstants.BILL_DETAIL}/:id/:page`}

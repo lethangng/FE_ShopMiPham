@@ -14,6 +14,21 @@ const getBillByYear = async (year: string | number) => {
   }
 };
 
+const revenueBills = async (month: string | number, year: string | number) => {
+  try {
+    // console.log(month, year);
+    const res = await api.get(`/v1/bill-revenue?month=${month}&year=${year}`);
+    // console.log(res.data);
+
+    if (res && res.data && res.data.errCode === 0) {
+      return res.data.data;
+    }
+    throw new Error("Get revenue bills fail!");
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+
 const getBillsPaging = async (keyword: string, currentPage: number | null) => {
   try {
     const res = await api.get(`v1/bills/${currentPage}?keyword=${keyword}`);
@@ -76,4 +91,5 @@ export const billService = {
   deleteBills,
   getProductBillById,
   deleteProductBills,
+  revenueBills,
 };

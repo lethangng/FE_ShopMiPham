@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "store";
 import { loadBillChartPaging } from "store/bills/actions";
 
-const Chart = () => {
+const ChartBill = () => {
   const datasets = useSelector((state: AppState) => state.bills.charts);
   const dispatch = useDispatch();
   const now = new Date();
@@ -87,4 +87,4 @@ const Chart = () => {
   );
 };
 
-export default Chart;
+export default ChartBill;
