@@ -21,11 +21,14 @@ const ChartTop10Product = () => {
       month: string | number,
       year: string | number
     ) => {
+      // console.log(month);
       const res = await productService.getTop10Product(month, year);
       setProducts(res);
     };
-    getProduct(searchKeywordMonth, searchKeywordYear);
-  }, []);
+    if (searchKeywordYear || parseInt(searchKeywordYear) >= 0) {
+      getProduct(searchKeywordMonth, searchKeywordYear);
+    }
+  }, [searchKeywordYear, searchKeywordMonth]);
 
   // Cắt chuỗi chỉ để lại số ký tự cần thiết
   function truncateString(str: string, maxLength: number = 20) {
@@ -81,17 +84,17 @@ const ChartTop10Product = () => {
     setSearchKeywordYear(e.target.value);
   };
 
-  const handleKeywordPressMonth = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleKeywordPressMonth = (e: ChangeEvent<HTMLSelectElement>) => {
     setSearchKeywordMonth(e.target.value);
   };
 
-  const handleSearch = async () => {
-    const res = await productService.getTop10Product(
-      searchKeywordMonth,
-      searchKeywordYear
-    );
-    setProducts(res);
-  };
+  // const handleSearch = async () => {
+  //   const res = await productService.getTop10Product(
+  //     searchKeywordMonth,
+  //     searchKeywordYear
+  //   );
+  //   setProducts(res);
+  // };
   return (
     <>
       <h1 className="h3 mb-2 text-gray-800">Thống kê top sản phẩm</h1>
@@ -102,7 +105,26 @@ const ChartTop10Product = () => {
           </h6>
         </div>
         <div className="header-buttons row">
-          <input
+          <select
+            className="form-control col mr-1"
+            value={searchKeywordMonth}
+            onChange={handleKeywordPressMonth}
+          >
+            <option disabled>Tháng</option>
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
+            <option value={4}>4</option>
+            <option value={5}>5</option>
+            <option value={6}>6</option>
+            <option value={7}>7</option>
+            <option value={8}>8</option>
+            <option value={9}>9</option>
+            <option value={10}>10</option>
+            <option value={11}>11</option>
+            <option value={12}>12</option>
+          </select>
+          {/* <input
             type="number"
             value={searchKeywordMonth}
             onChange={handleKeywordPressMonth}
@@ -110,23 +132,23 @@ const ChartTop10Product = () => {
             placeholder="Tháng"
             min={1}
             max={12}
-          />
+          /> */}
           <input
             type="number"
             value={searchKeywordYear}
             onChange={handleKeywordPressYear}
-            className="form-control col mr-1"
+            className="form-control col mr-4"
             placeholder="Năm"
             min={2000}
             max={now.getFullYear().toString()}
           />
-          <button
+          {/* <button
             onClick={handleSearch}
             type="button"
             className="btn btn-outline-primary mr-3"
           >
             <i className="fas fa-search"></i> Tìm kiếm
-          </button>
+          </button> */}
         </div>
       </div>
       <ChartComponent type="bar" data={data} options={options} />

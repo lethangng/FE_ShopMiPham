@@ -90,7 +90,7 @@ const ChartRevenue = () => {
     setSearchKeywordYear(e.target.value);
   };
 
-  const handleKeywordPressMonth = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleKeywordPressMonth = (e: ChangeEvent<HTMLSelectElement>) => {
     setSearchKeywordMonth(e.target.value);
   };
 
@@ -140,15 +140,34 @@ const ChartRevenue = () => {
               </div>
               <div className="col">
                 {inputValue === "month" && (
-                  <input
-                    type="number"
+                  <select
+                    className="form-control col mr-1"
                     value={searchKeywordMonth}
                     onChange={handleKeywordPressMonth}
-                    className="form-control col-auto mr-1"
-                    placeholder="Tháng"
-                    min={1}
-                    max={12}
-                  />
+                  >
+                    <option disabled>Tháng</option>
+                    <option value={1}>1</option>
+                    <option value={2}>2</option>
+                    <option value={3}>3</option>
+                    <option value={4}>4</option>
+                    <option value={5}>5</option>
+                    <option value={6}>6</option>
+                    <option value={7}>7</option>
+                    <option value={8}>8</option>
+                    <option value={9}>9</option>
+                    <option value={10}>10</option>
+                    <option value={11}>11</option>
+                    <option value={12}>12</option>
+                  </select>
+                  // <input
+                  //   type="number"
+                  //   value={searchKeywordMonth}
+                  //   onChange={handleKeywordPressMonth}
+                  //   className="form-control col-auto mr-1"
+                  //   placeholder="Tháng"
+                  //   min={1}
+                  //   max={12}
+                  // />
                 )}
 
                 <input

@@ -18,7 +18,7 @@ const ChartBill = () => {
 
   useEffect(() => {
     dispatch(loadBillChartPaging(searchKeyword) as any);
-  }, [dispatch]);
+  }, [dispatch, searchKeyword]);
 
   const data = {
     labels: labels,
@@ -52,9 +52,9 @@ const ChartBill = () => {
     setSearchKeyword(e.target.value);
   };
 
-  const handleSearch = () => {
-    dispatch(loadBillChartPaging(searchKeyword) as any);
-  };
+  // const handleSearch = () => {
+  //   dispatch(loadBillChartPaging(searchKeyword) as any);
+  // };
   return (
     <>
       <h1 className="h3 mb-2 text-gray-800">Thống kê hóa đơn</h1>
@@ -69,17 +69,17 @@ const ChartBill = () => {
             type="number"
             value={searchKeyword}
             onChange={handleKeywordPress}
-            className="form-control col mr-1"
+            className="form-control col mr-4"
             placeholder="Năm"
             min={2000}
           />
-          <button
+          {/* <button
             onClick={handleSearch}
             type="button"
             className="btn btn-outline-primary mr-3"
           >
             <i className="fas fa-search"></i> Tìm kiếm
-          </button>
+          </button> */}
         </div>
       </div>
       <ChartComponent type="bar" data={data} options={options} />
